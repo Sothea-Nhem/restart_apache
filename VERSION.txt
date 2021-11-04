@@ -1,1 +1,16 @@
 0.0.1
+
+CONFIG="$1"
+COMMAND="$2"
+
+if [ $# -ne 2 ]
+then
+    echo "$0 requires two parameters {virtual-host} {restart|reload}"
+    exit 1
+fi
+
+sudo a2dissite "$CONFIG"
+sudo service apache2 "$COMMAND"
+
+sudo a2ensite "$CONFIG"
+sudo service apache2 "$COMMAND"
